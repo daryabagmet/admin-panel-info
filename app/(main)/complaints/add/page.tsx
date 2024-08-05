@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import BackButton from '@/components/BackButton'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
@@ -12,6 +13,13 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
@@ -19,18 +27,16 @@ import complaints from '@/data/complaints'
 import { useToast } from '@/components/ui/use-toast'
 import { Plus } from 'lucide-react'
 
+const doctorsNames = ['all', 'docA', 'docB', 'docC'] as const
 const formSchema = z.object({
-  title: z.string().min(1, {
-    message: 'Title is required',
+  subject: z.string().min(1, {
+    message: 'Subject is required',
   }),
   body: z.string().min(1, {
     message: 'Body is required',
   }),
-  doctor: z.string().min(1, {
-    message: 'doctor is required',
-  }),
-  date: z.string().min(1, {
-    message: 'Date is required',
+  doctor: z.enum(doctorsNames, {
+    errorMap: () => ({ message: 'Doctor is required' }),
   }),
 })
 
@@ -41,6 +47,7 @@ interface ComplaintsAddPageProps {
 }
 
 const ComplaintsAddPage = ({ params }: ComplaintsAddPageProps) => {
+  const router = useRouter()
   const { toast } = useToast()
 
   const complaint = complaints.find((complaint) => complaint.id === params.id)
@@ -48,18 +55,17 @@ const ComplaintsAddPage = ({ params }: ComplaintsAddPageProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: complaint?.title || '',
+      subject: complaint?.subject || '',
       body: complaint?.body || '',
-      doctor: complaint?.doctor || '',
-      date: complaint?.date || '',
+      doctor: 'all',
     },
   })
 
   const handleSubmit = (data: z.infer<typeof formSchema>) => {
     toast({
-      title: 'Complaint has been added successfully',
-      description: `Added by ${complaint?.doctor} on ${complaint?.date}`,
+      description: 'Complaint has been added successfully',
     })
+    router.push('/complaints')
   }
 
   return (
@@ -70,16 +76,16 @@ const ComplaintsAddPage = ({ params }: ComplaintsAddPageProps) => {
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="title"
+            name="subject"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="uppercase text-xs font-bold text-zinc-500">
-                  Title
+                  Subject
                 </FormLabel>
                 <FormControl>
                   <Input
                     className="bg-slate-100  border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                    placeholder="Enter Title"
+                    placeholder="Enter subject"
                     {...field}
                   />
                 </FormControl>
@@ -94,12 +100,12 @@ const ComplaintsAddPage = ({ params }: ComplaintsAddPageProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="uppercase text-xs font-bold text-zinc-500 ">
-                  Body
+                  Complaint
                 </FormLabel>
                 <FormControl>
                   <Textarea
                     className="bg-slate-100  border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                    placeholder="Enter Body"
+                    placeholder="Enter complaints"
                     {...field}
                   />
                 </FormControl>
@@ -111,37 +117,23 @@ const ComplaintsAddPage = ({ params }: ComplaintsAddPageProps) => {
           <FormField
             control={form.control}
             name="doctor"
-            render={({ field }) => (
-              <FormItem>
+            render={() => (
+              <FormItem className="w-[50%] ">
                 <FormLabel className="uppercase text-xs font-bold text-zinc-500">
-                  doctor
+                  Select the doctor
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    className="bg-slate-100 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                    placeholder="Enter doctor"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="date"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="uppercase text-xs font-bold text-zinc-500">
-                  Date
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    className="bg-slate-100 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                    placeholder="Enter Date"
-                    {...field}
-                  />
+                  <Select>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select doctor" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All doctors</SelectItem>
+                      <SelectItem value="docA">Doctor A</SelectItem>
+                      <SelectItem value="docB">Doctor B</SelectItem>
+                      <SelectItem value="docC">Doctor C</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </FormControl>
                 <FormMessage />
               </FormItem>

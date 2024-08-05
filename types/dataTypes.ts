@@ -1,16 +1,18 @@
 export interface Complaint {
   id: string
-  title: string
+  subject: string
   body: string
   doctor: string
   date: string
-  comments: ComplaintComment[]
+  results: ComplaintResult[]
 }
 
-export interface ComplaintComment {
+export interface ComplaintResult {
   id: string
-  text: string
-  username: string
+  title: string
+  result: string
+  doctor: string
+  date: string
 }
 
 export interface AnalyticsItem {

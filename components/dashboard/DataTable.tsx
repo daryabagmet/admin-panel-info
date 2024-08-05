@@ -34,7 +34,7 @@ const DataTable = ({ title, limit }: DataTableProps) => {
         <TableCaption>A list of recent patients</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>Title</TableHead>
+            <TableHead>Subject</TableHead>
             <TableHead className="hidden md:table-cell">Doctor</TableHead>
             <TableHead className="hidden md:table-cell">Date</TableHead>
             <TableHead className="hidden md:table-cell">Details</TableHead>
@@ -43,7 +43,7 @@ const DataTable = ({ title, limit }: DataTableProps) => {
         <TableBody>
           {filteredData.map((item) => (
             <TableRow key={item.id}>
-              <TableCell>{item.title}</TableCell>
+              <TableCell>{item.subject}</TableCell>
               <TableCell className="hidden md:table-cell">
                 {item.doctor}
               </TableCell>
@@ -51,7 +51,7 @@ const DataTable = ({ title, limit }: DataTableProps) => {
                 {item.date}
               </TableCell>
               <TableCell className="hidden md:table-cell">
-                <Link href={`complaints/${item.id}`}>View deatils</Link>
+                <Link href={`complaints/${item.id}`}>View details</Link>
               </TableCell>
             </TableRow>
           ))}
