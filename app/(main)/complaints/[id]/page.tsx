@@ -53,7 +53,7 @@ const ComplaintsPageProps = ({ params }: ComplaintsPageProps) => {
             <div className="flex gap-1 w-[75%] flex-wrap">
               {item.results.map((r) => {
                 return (
-                  <span className="flex items-center w-full">
+                  <span key={r.id} className="flex items-center w-full">
                     {r.title}:{' '}
                     {r.result === 'OK' ? (
                       <CircleCheck className="text-green-500 mx-2" size={32} />
