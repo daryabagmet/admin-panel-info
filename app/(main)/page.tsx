@@ -37,7 +37,6 @@ export default function Home() {
         />
       </div>
       <AnalyticsChart /> */}
-
       <Card className="bg-slate-100 p-4 pb-0">
         <CardContent>
           <div className="flex gap-5 justify-center items-center">
