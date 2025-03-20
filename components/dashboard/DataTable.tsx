@@ -31,7 +31,6 @@ const DataTable = ({ title, limit }: DataTableProps) => {
         {title ? title : 'Patients'}
       </h3>
       <Table>
-        <TableCaption>A list of recent patients</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Subject</TableHead>

@@ -5,6 +5,7 @@ export interface Complaint {
   doctor: string
   date: string
   results: ComplaintResult[]
+  prescriptions: string;
 }
 
 export interface ComplaintResult {

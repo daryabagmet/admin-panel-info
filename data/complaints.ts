@@ -23,6 +23,7 @@ const complaints: Complaint[] = [
         date: '2024-03-21',
       },
     ],
+    prescriptions: ''
   },
   {
     id: '2',
@@ -34,18 +35,19 @@ const complaints: Complaint[] = [
       {
         id: '1',
         title: 'Blood test',
-        result: 'OK',
+        result: 'Normal',
         doctor: 'Mark Jason',
         date: '2024-03-23',
       },
       {
         id: '2',
         title: 'Blood test',
-        result: 'OK',
+        result: 'Normal',
         doctor: 'Sarah Neil',
         date: '2024-03-23',
       },
     ],
+    prescriptions: ''
   },
   {
     id: '3',
@@ -64,11 +66,12 @@ const complaints: Complaint[] = [
       {
         id: '2',
         title: 'Blood test',
-        result: 'OK',
+        result: 'Normal',
         doctor: 'Michael Brown',
         date: '2024-03-26',
       },
     ],
+    prescriptions: ''
   },
   {
     id: '4',
@@ -80,18 +83,19 @@ const complaints: Complaint[] = [
       {
         id: '1',
         title: 'Blood test',
-        result: 'OK',
+        result: 'Normal',
         doctor: 'Grace Wilson',
         date: '2024-03-28',
       },
       {
         id: '2',
         title: 'Blood test',
-        result: 'OK',
+        result: 'Normal',
         doctor: 'Jack',
         date: '2024-03-28',
       },
     ],
+    prescriptions: ''
   },
   {
     id: '5',
@@ -103,7 +107,7 @@ const complaints: Complaint[] = [
       {
         id: '1',
         title: 'Blood test',
-        result: 'OK',
+        result: 'Normal',
         doctor: 'Olivia Wiz',
         date: '2024-03-30',
       },
@@ -115,6 +119,7 @@ const complaints: Complaint[] = [
         date: '2024-03-30',
       },
     ],
+    prescriptions: ''
   },
   {
     id: '6',
@@ -126,18 +131,19 @@ const complaints: Complaint[] = [
       {
         id: '1',
         title: 'Blood test',
-        result: 'OK',
-        doctor: 'Sophie',
+        result: 'Normal',
+        doctor: 'Sophie Doe',
         date: '2024-04-02',
       },
       {
         id: '2',
         title: 'Blood test',
-        result: 'OK',
-        doctor: 'Ethan',
+        result: 'Normal',
+        doctor: 'Ethan Brown',
         date: '2024-04-02',
       },
     ],
+    prescriptions: ''
   },
 ]
 

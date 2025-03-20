@@ -3,14 +3,7 @@
 import complaints from '@/data/complaints'
 import { Complaint } from '@/types/dataTypes'
 import BackButton from '@/components/BackButton'
-import {
-  Clipboard,
-  User,
-  CircleCheck,
-  CircleX,
-  Microscope,
-  Tablets,
-} from 'lucide-react'
+import { Clipboard, Microscope } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
@@ -30,49 +23,29 @@ const ComplaintsPageProps = ({ params }: ComplaintsPageProps) => {
     <>
       <BackButton text="Back to complaints" link="/complaints" />
       <h3 className="text-2xl mb-4">Complaints detail</h3>
-      <Card className="bg-blue-200 p-4 pb-0 w-full mx-auto my-4">
+      <Card className="bg-blue-100 w-full mx-auto my-4">
         <CardContent>
-          <div className="flex gap-3">
-            <Clipboard className="text-slate-700" size={64} />
+          <div className="flex gap-3 pt-6">
+            <Clipboard className="text-slate-700" size={60} />
             <div className="flex gap-3 flex-wrap w-[75%]">
-              <span className="w-full">Subject: {item.subject}</span>
-              <span className="w-full">Date: {item.date}</span>
-              <span className="w-full"> Doctor: {item.doctor}</span>
+              <span className="w-full">Subject: {item?.subject}</span>
+              <span className="w-full">Date: {item?.date}</span>
+              <span className="w-full">Doctor: {item?.doctor}</span>
+              <span className="w-full">Description: {item?.body}</span>
+              <span className="w-full">Prescriptions: {item?.prescriptions || 'No prescriptions'} </span>
             </div>
           </div>
           <Separator className="my-4 bg-slate-700" />
           <div className="flex gap-3 flex-wrap">
-            <User className="text-slate-700" size={64} />
-            <div className="flex gap-3 w-[75%]">
-              <span className="w-full">{item.body}</span>
-            </div>
-          </div>
-          <Separator className="my-4 bg-slate-700" />
-          <div className="flex gap-3 flex-wrap">
-            <Microscope className="text-slate-700" size={64} />
+            <Microscope className="text-slate-700" size={60} />
             <div className="flex gap-1 w-[75%] flex-wrap">
               {item.results.map((r) => {
                 return (
                   <span key={r.id} className="flex items-center w-full">
-                    {r.title}:{' '}
-                    {r.result === 'OK' ? (
-                      <CircleCheck className="text-green-500 mx-2" size={32} />
-                    ) : (
-                      <>
-                        <CircleX className="text-red-500 mx-2" size={32} />
-                        <span>{r.result}</span>
-                      </>
-                    )}
+                    {r.title}: {r.result}
                   </span>
                 )
               })}
-            </div>
-          </div>
-          <Separator className="my-4 bg-slate-700" />
-          <div className="flex gap-3 flex-wrap">
-            <Tablets className="text-slate-700" size={64} />
-            <div className="flex gap-3 w-[75%]">
-              <span className="w-full">Prescriptions:</span>
             </div>
           </div>
         </CardContent>

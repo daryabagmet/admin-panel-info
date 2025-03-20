@@ -129,9 +129,9 @@ const ComplaintsAddPage = ({ params }: ComplaintsAddPageProps) => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">All doctors</SelectItem>
-                      <SelectItem value="docA">Doctor A</SelectItem>
-                      <SelectItem value="docB">Doctor B</SelectItem>
-                      <SelectItem value="docC">Doctor C</SelectItem>
+                      <SelectItem value="1">Doctor Jane Benett</SelectItem>
+                      <SelectItem value="2">Doctor Alex Jown</SelectItem>
+                      <SelectItem value="docC">Doctor Emily Smith</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormControl>
@@ -140,7 +140,7 @@ const ComplaintsAddPage = ({ params }: ComplaintsAddPageProps) => {
             )}
           />
 
-          <Button className="w-full">
+          <Button className="w-[300]">
             <Plus />
             Add complaint
           </Button>

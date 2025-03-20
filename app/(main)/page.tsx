@@ -1,3 +1,4 @@
+'use client';
 import AnalyticsChart from '@/components/dashboard/AnalyticsChart'
 import DashboardCard from '@/components/dashboard/DashboardCard'
 import DataTable from '@/components/dashboard/DataTable'
@@ -10,8 +11,12 @@ import {
 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import Link from 'next/link'
+import { useAuth } from '@/data/context/AuthContext'
 
 export default function Home() {
+  const { user } = useAuth();
+  const username = user?.split('@')[0] || 'user';
+
   return (
     <>
       {/* <div className="flex flex-col md:flex-row justify-between gap-5 mb-5">
@@ -40,9 +45,9 @@ export default function Home() {
       <Card className="bg-slate-100 p-4 pb-0">
         <CardContent>
           <div className="flex gap-5 justify-center items-center">
-            <User className="text-slate-500" size={72} />
+            <User className="text-slate-500" size={70} />
             <h3 className="text-5xl font-semibold text-slate-500">
-              Hello, user
+              Hello, {username}
             </h3>
           </div>
           <h3 className="text-3xl text-center mb-4 font-bold text-slate-500">
@@ -64,7 +69,7 @@ export default function Home() {
           </div>
         </CardContent>
       </Card>
-      <DataTable title="Old complaints" limit={3} />
+      <DataTable title="Old complaints" limit={5} />
     </>
   )
 }
