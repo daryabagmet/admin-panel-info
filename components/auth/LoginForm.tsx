@@ -1,6 +1,5 @@
 'use client'
 
-import BackButton from '@/components/BackButton'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,6 +21,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
+import { useAuth } from '@/data/context/AuthContext'
+
 
 const formSchema = z.object({
   email: z
@@ -38,8 +39,8 @@ const formSchema = z.object({
 })
 
 const LoginForm = () => {
+  const { login } = useAuth();
   const router = useRouter()
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,6 +51,7 @@ const LoginForm = () => {
 
   const handleSubmit = (data: z.infer<typeof formSchema>) => {
     router.push('/')
+    login(data.email);
   }
 
   return (
@@ -107,7 +109,7 @@ const LoginForm = () => {
               )}
             />
 
-            <Button className="w-full">Sign In</Button>
+            <Button className="w-full">Log In</Button>
           </form>
         </Form>
       </CardContent>

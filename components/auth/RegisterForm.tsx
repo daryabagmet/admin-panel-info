@@ -37,6 +37,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { CalendarIcon } from 'lucide-react'
+import { useAuth } from '@/data/context/AuthContext'
 
 const currentYear = new Date().getFullYear()
 const minDate = new Date(currentYear - 18, 0, 1)
@@ -69,6 +70,7 @@ const formSchema = z.object({
 })
 
 const RegisterForm = () => {
+  const { login } = useAuth();
   const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -85,7 +87,7 @@ const RegisterForm = () => {
   })
 
   const handleSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data)
+    login(data.email);
     router.push('/')
   }
 
